@@ -1,0 +1,137 @@
+{
+	"name": "Copydata_task",
+	"properties": {
+		"description": "copy data from blob toadls",
+		"activities": [
+			{
+				"name": "Copy_hyr",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "blobcontainer1/dir1/logistics_source1"
+					},
+					{
+						"name": "Destination",
+						"value": "suganyatelcontainer/directory1/Logistics_target"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "FlattenHierarchy",
+							"blockSizeInMB": 10
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "SuganyaLS1",
+							"type": "LinkedServiceReference"
+						},
+						"path": "blobcontainer1/dir1",
+						"enableCompression": true
+					},
+					"parallelCopies": 2,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "SuganyaLS1",
+								"type": "LinkedServiceReference"
+							},
+							"path": "blobcontainer1/dir1"
+						}
+					},
+					"dataIntegrationUnits": 4,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "city_name",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['city_name']"
+								}
+							},
+							{
+								"source": {
+									"name": "country",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['country']"
+								}
+							},
+							{
+								"source": {
+									"name": "latitude",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['latitude']"
+								}
+							},
+							{
+								"source": {
+									"name": "longitude",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['longitude']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_hyr",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_hyr",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-05-02T09:59:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

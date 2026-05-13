@@ -1,0 +1,24 @@
+{
+	"name": "Trigger_hyr",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Copydata_task",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2026-05-01T08:26:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

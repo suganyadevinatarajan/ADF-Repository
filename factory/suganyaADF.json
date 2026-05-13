@@ -1,0 +1,15 @@
+{
+	"name": "suganyaADF",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "69a465c7-d81a-4000-907c-cf78ae31fa23",
+		"tenantId": "d7de8392-0237-43a2-8b08-42cd87a24303"
+	}
+}

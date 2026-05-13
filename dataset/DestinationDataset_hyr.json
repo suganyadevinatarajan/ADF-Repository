@@ -1,0 +1,21 @@
+{
+	"name": "DestinationDataset_hyr",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adlstgt1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "master_city",
+				"folderPath": "directory1",
+				"fileSystem": "suganyatelcontainer"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
